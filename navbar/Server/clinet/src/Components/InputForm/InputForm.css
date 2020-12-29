@@ -1,0 +1,42 @@
+.containercss {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    background: transparent;
+    
+  }
+
+  input[type=button] {
+    background-color: rgb(43, 67, 173);
+    border: none;
+    color: #fffcf9;
+    text-decoration: none;
+    width: 200px;
+    align-content: center;
+  }
+
+  .form{
+    background-color: aliceblue;
+    background: transparent;
+  }
+.inputbox{
+  display: flex;
+  width: 500px;
+  margin-left: 500px;
+}
+
+.headers{
+  display: flex;
+  text-align: center;
+  margin-left: 600px;
+  margin-bottom: 10px;
+  color:whitesmoke;
+  font-style: italic;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.showbutton{
+  display: flex;
+  text-align: center;
+  margin-left: 650px;
+}
