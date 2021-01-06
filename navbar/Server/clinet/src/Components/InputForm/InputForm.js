@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './InputForm.css';
 
 class InputForm extends Component{
     render(){
+       
+
 return (
     
         <div className="containercss">
@@ -10,7 +12,8 @@ return (
                 <h1 className="headers">
                     Investment Amount
                 </h1> 
-                <input className="inputbox" type = "number" name = "amount" min="1.0" required = "true" placeholder="Enter amount"/>
+                <input className="inputbox" type = "number" name = "amount" min="1.0" required = "true" 
+                    />
                 <br/><br/>
                 <h1 className="headers">Risk</h1>  
                 <select className="inputbox" name = "risks" >
@@ -24,7 +27,7 @@ return (
                 <h1 className="headers">Investment Term </h1>
                 <input className="inputbox"  placeholder="Optional" type="number" id="term" name="term" min="1" max="12"></input>
                 <br/><br/>
-                <input className="showbutton" type="button" value="Show Investment Options"></input>
+                <button className="showbutton"> Submit options</button>
 
             </form>
         </div>
