@@ -41,21 +41,25 @@ app.get("/api/getdata",(req, res)=>{
     const risk = req.query.riskLevel;
     const term = req.query.termValue;
 
+    console.log(risk);
 
     const sqlSelect = "select * from FinanceOptions where risklevel=(?) and term=(?);"
    
    
     db.query(sqlSelect,[risk,term],(error, result)=>{
        
-        //console.log(result);
-       var optionId = result[0].optionid;
-       var optionName = result[1].optionname;
-       
-    });
+        console.log("RESULT iS: " + JSON.stringify(result));
 
-    
-    res.send(output);
+       const optionId = result[0].optionid;
+       const optionName = result[0].optionname;
+
+       console.log("id" + optionid);
+       console.log("name" + optionname);
+       
+       res.send(result);
+    });
 });
+
 
 
 app.listen(3001, ()=>{
