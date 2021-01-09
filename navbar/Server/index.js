@@ -45,20 +45,51 @@ app.get("/api/getdata",(req, res)=>{
 
     const sqlSelect = "select * from FinanceOptions where risklevel=(?) and term=(?);"
    
-   
+    var optionId ;
+    var optionName;
     db.query(sqlSelect,[risk,term],(error, result)=>{
        
-        console.log("RESULT iS: " + JSON.stringify(result));
+        //console.log("RESULT iS: " + JSON.stringify(result));
 
-       const optionId = result[0].optionid;
-       const optionName = result[0].optionname;
+        optionId = result[0].optionid;
+        optionName = result[0].optionname;
 
-       console.log("id" + optionid);
-       console.log("name" + optionname);
-       
+       console.log("id " + optionId);
+       console.log("name " + optionName);
+
+       //Get Second table values to call REST API
+
        res.send(result);
+       
     });
 });
+//     //2nd GET
+//     app.get("/api/getdata",(req, res)=>{
+//     async.series( [
+//         // Get the first table contents
+//         function ( callback ) {
+//             connection.query('SELECT * FROM restaurants WHERE name = ' . request.body.name, function(err, rows, fields) {
+//                 console.log('Connection result error '+err);
+//                 name_of_restaurants = rows;
+//                 callback();
+//             });
+//         },
+//         // Get the second table contents
+//         function ( callback ) {
+//             connection.query('SELECT * FROM RestaurantTimings', function(err, rows, fields) {
+//                 console.log('Connection result error '+err);
+//                 RestaurantTimings = rows;
+//                 callback();
+//             });
+//         }
+
+//    // Send the response
+//     ], function ( error, results ) {
+//         response.json({
+//             'restaurants' : name_of_restaurants,
+//             'RestaurantTimings' : RestaurantTimings
+//         });
+//});
 
 
 

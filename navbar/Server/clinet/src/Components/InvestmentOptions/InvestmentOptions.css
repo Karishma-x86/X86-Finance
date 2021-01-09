@@ -1,0 +1,27 @@
+ .headerForInvestment {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:  rgb(142, 0, 69);
+    color: #fffcf9;
+    height: 80px;
+    text-align: center;
+    font-size: xx-large;
+    padding: 20px;
+ }
+
+ table, td, th {
+    border: 1px solid black;
+    font-style: italic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    font-weight: bold;
+  }
+  
+  table {
+    width: 98%;
+    border-collapse: collapse;
+    margin: 10px;
+  }

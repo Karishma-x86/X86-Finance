@@ -1,0 +1,26 @@
+.headerForAboutUs{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:  rgb(142, 0, 69);
+    color: #fffcf9;
+    height: 80px;
+    text-align: center;
+    font-size: xx-large;
+    padding: 20px;
+}
+
+.aboutUsPara {
+    font-weight: normal;
+    font-style: italic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-indent: 10%;
+    border: 10ch;
+    border-color: black ;
+}
+
+a[href^="mailto"]::before {
+    content: "📧 ";
+}
+
+a[href^="tel"]::before {
+    content: "📞 ";
+}

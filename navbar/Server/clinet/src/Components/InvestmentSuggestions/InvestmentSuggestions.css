@@ -1,0 +1,19 @@
+.containercss{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
+    text-align: left;
+   
+    border: 1px solid black;
+}
+
+.result-para{
+    margin-left: 50px;
+    margin-top: 10px;
+    font-style: italic;
+    font-weight: none;
+ }
+
+ h1,h3 {
+     color: #8e0045;
+     font-weight: bold;
+ }

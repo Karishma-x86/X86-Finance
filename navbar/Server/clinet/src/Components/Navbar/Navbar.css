@@ -1,8 +1,8 @@
 .NavbarItems
 {
-    background: linear-gradient(90deg, #0072C6,
-     #0072C6 50%);
-    height: 80px;
+    background: linear-gradient(90deg, rgb(142, 0, 69),
+     rgb(142, 0, 69) 50%);
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,10 +10,11 @@
 }
 
 .navbar-logo
+
 {
     color: #fffcf9;
     justify-self: start;
-    background-color: rgb(38, 54, 197);
+    background-color: rgb(142, 0, 69);
     cursor: pointer;
     height :80px;
 }
@@ -31,7 +32,6 @@
     list-style: none;
     text-align:center;
     width: 80vw;
-    margin-left: 890px;
 }
 
 .nav-links{

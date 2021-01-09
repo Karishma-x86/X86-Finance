@@ -1,6 +1,9 @@
 import React, { useState, useEffect} from 'react'
 import Navbar from "./Components/Navbar/Navbar";
 import InputForm from "./Components/InputForm/InputForm";
+import AboutUs from './Components/AboutUs/AboutUs';
+import InvestmentOptions from './Components/InvestmentOptions/InvestmentOptions';
+import InvestmentSuggestions from './Components/InvestmentSuggestions/InvestmentSuggestions';
 import './App.css';
 import { Component } from "react";
 import Axios from 'axios'
@@ -23,25 +26,38 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="imagecss" >
-        <br></br>
-         <input className="inputbox" type = "number" name = "amount" min="1.0" required = "true" 
-                    placeholder="Enter amount" onChange={(e)=>{
-                      setTerm(e.target.value)
-                    }}/>
-           <br></br>
-          <input className="inputbox" type = "text" name = "amount" min="1.0" required = "true" 
-                    placeholder="Enter risk" onChange={(e)=>{
-                      setRisk(e.target.value)
-                    }}/>
-                    
-          <button className="showbutton" onClick={submitData}> Submit options</button>
-          <br></br>
-          <h1></h1>
-      </div>
-      <div>
+      <div className="imagecss">
+     
+     <h1 className = "header">Let's Get Started</h1>
 
-      </div>
+</div>
+
+	  <div class="container">
+        <form className = "form">
+        <h3 className="headers">
+                    Investment Amount
+                </h3> 
+                 <input type = "number" name = "amount" min="1.0" required = "true" placeholder="Enter amount you wish to invest"/>
+          <br/><br/>
+          <h3 className="headers">Risk</h3>   
+          <select name = "risks">
+              <option value = "Low" selected>Low</option>
+              <option value = "Medium">Medium</option>
+              <option value = "High">High</option>
+          </select>
+          <br/><br/>
+          <h3 className="headers">Investment Term </h3>
+           <input type="number" id="term" name="term" min="1" placeholder="Enter terms(month) for investment"></input>
+          <br/><br/>
+          
+		  <button className="showbutton"  onClick={submitData}> Submit options</button>
+        </form>
+    </div>
+    <InvestmentSuggestions/>
+      <br/>  <br/> <br/><br/>
+	  <InvestmentOptions/>
+      
+      <AboutUs />
     </div>
     
   );
