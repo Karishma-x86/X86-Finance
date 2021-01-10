@@ -57,8 +57,9 @@ app.get("/api/getdata",(req, res)=>{
        console.log("id " + optionId);
        console.log("name " + optionName);
 
-       //Get Second table values to call REST API
+       
 
+        
        res.send(result);
        
     });

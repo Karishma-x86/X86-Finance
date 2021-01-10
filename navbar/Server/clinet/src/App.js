@@ -14,14 +14,24 @@ function App() {
   const [amount, setAmount] = useState('')
   const [risk, setRisk] = useState('')
   const [term, setTerm] = useState('')
-
+  const [divsugg, setSugDiv] = useState('')
+  
   const submitData = ()=>{
+
+    var risklvl = document.getElementById("risklevel").value;
     //Axios.get('http://localhost:3001/api/getdata/${ risk,term}')
-    Axios.get('http://localhost:3001/api/getdata',{ params :{riskLevel : risk, termValue: term}})
+    Axios.get('http://localhost:3001/api/getdata',{ params :{riskLevel : risklvl, termValue: term}})
     .then(res=>console.log(res));
-    
+    setSugDiv("true");
   };
   
+  var divStyleSuggestion = {
+    display:divsugg?'block':'none'
+  };
+
+  var divStyleAllSuggestion = {
+    display:divsugg?'block':'none'
+  };
 
   return (
     <div className="App">
@@ -37,26 +47,36 @@ function App() {
         <h3 className="headers">
                     Investment Amount
                 </h3> 
-                 <input type = "number" name = "amount" min="1.0" required = "true" placeholder="Enter amount you wish to invest"/>
+                 <input type = "number" name = "amount" min="1.0" required = "true" 
+                 placeholder="Enter amount you wish to invest" onChange={(e)=>{
+                  setAmount(e.target.value)}}/>
           <br/><br/>
           <h3 className="headers">Risk</h3>   
-          <select name = "risks">
+          <select name = "risks" id="risklevel">
               <option value = "Low" selected>Low</option>
               <option value = "Medium">Medium</option>
               <option value = "High">High</option>
           </select>
           <br/><br/>
           <h3 className="headers">Investment Term </h3>
-           <input type="number" id="term" name="term" min="1" placeholder="Enter terms(month) for investment"></input>
+           <input type="number" id="term" name="term" min="1" placeholder="Enter terms(month) for investment" 
+           onChange={(e)=>{setTerm(e.target.value)}}>
+
+           </input>
           <br/><br/>
           
 		  <button className="showbutton"  onClick={submitData}> Submit options</button>
         </form>
     </div>
-    <InvestmentSuggestions/>
+    <br></br>
+    <div style={divStyleSuggestion}>
+      <InvestmentSuggestions />
+    </div>
       <br/>  <br/> <br/><br/>
-	  <InvestmentOptions/>
-      
+	    <div style={divStyleAllSuggestion}>
+        <InvestmentOptions/>
+      </div>
+      <br></br>
       <AboutUs />
     </div>
     
