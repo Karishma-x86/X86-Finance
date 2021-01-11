@@ -20,7 +20,7 @@ function App() {
 
     var risklvl = document.getElementById("risklevel").value;
     //Axios.get('http://localhost:3001/api/getdata/${ risk,term}')
-    Axios.get('http://localhost:3001/api/getdata',{ params :{riskLevel : risklvl, termValue: term}})
+    Axios.get('http://localhost:3001/api/getdata',{ params :{riskLevel : risklvl, termValue: term, amountgiven : amount}})
     .then(res=>console.log(res));
     setSugDiv("true");
   };

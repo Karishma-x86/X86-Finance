@@ -23,7 +23,13 @@ const db = mysql.createPool({
     database:'x86finance'
 });
 
+var dbData;
+var amount;
 
+function setValue(value) {
+    dbData = value;
+    //console.log(dbData);
+  }
 // app.post("/api/insert",(req, res)=>{
     
 //     console.log(req.body.riskLevel);
@@ -41,37 +47,69 @@ app.get("/api/getdata",(req, res)=>{
 
     var risk = req.query.riskLevel;
     var term = req.query.termValue;
+    amount = req.query.amountgiven;
 
-    if(term === null)
+    //console.log(amount);
+
+    var sqlSelect;
+
+    if(!term)
     {
-        term = null;
+        sqlSelect = "select * from FinanceOptions where risklevel=(?);"
     }
-    console.log(risk);
+    else
+    {
+         sqlSelect = "select * from FinanceOptions where risklevel=(?) ;"
+    }
 
-    const sqlSelect = "select * from FinanceOptions where risklevel=(?) and term=(?);"
-   
-    var optionId ;
-    var optionName;
-    db.query(sqlSelect,[risk,term],(error, result)=>{
-       
-        console.log("RESULT iS: " + JSON.stringify(result));
-
-        optionId = result[0].optionid;
-        optionName = result[0].optionname;
-
-       console.log("id " + optionId);
-       console.log("name " + optionName);
-
-       if(optionName === "Bank F.D")
-       {
-           
-       }
-
+        db.query(sqlSelect,[risk,term],(error, result)=>{
         
-       res.send(result);
-       
-    });
+        // console.log("RESULT iS: " + JSON.stringify(result));
+
+            //optionId = result[0].optionid;
+            //optionName = result[0].optionname;
+
+            setValue(result);
+
+            //Iterate through the all rows
+            Object.keys(dbData).forEach(function(key) {
+                var row = result[key];
+
+                //console.log(row);
+                if(row.optionname === "Gold")
+                {
+                    https.get("https://metals-api.com/api/latest?access_key=059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge&base=INR&symbols=XAU", resgold=>{
+
+                       //var json = JSON.stringify(resgold);
+                       console.log(resgold);
+                    });
+                }
+                else if(row.optionname === "Bank F.D")
+                {
+                    var RATEOFINTEREST = 4;
+                    var time = 1;
+                    if(term)
+                    {
+                        time  = term/12; 
+                        console.log("TIME is " + time); 
+                    }
+                    var simpleInterest = (amount * RATEOFINTEREST * time)/100;
+                    
+                    var finalAmount = parseInt(simpleInterest) + parseInt(amount);
+                    //console.log("SI  " + simpleInterest);
+                    console.log("Final amount after term  " + finalAmount );
+
+                }
+
+            });
+        });
+
+    res.send("HELLO");
 });
+
+
+
+
 //     //2nd GET
 //     app.get("/api/getdata",(req, res)=>{
 //     async.series( [
