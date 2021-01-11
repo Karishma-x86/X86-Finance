@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { json } = require('body-parser');
+var https = require('https');
 
 const app =   express();
 
@@ -38,9 +39,13 @@ const db = mysql.createPool({
 //Need parameters to call getdata..
 app.get("/api/getdata",(req, res)=>{
 
-    const risk = req.query.riskLevel;
-    const term = req.query.termValue;
+    var risk = req.query.riskLevel;
+    var term = req.query.termValue;
 
+    if(term === null)
+    {
+        term = null;
+    }
     console.log(risk);
 
     const sqlSelect = "select * from FinanceOptions where risklevel=(?) and term=(?);"
@@ -49,7 +54,7 @@ app.get("/api/getdata",(req, res)=>{
     var optionName;
     db.query(sqlSelect,[risk,term],(error, result)=>{
        
-        //console.log("RESULT iS: " + JSON.stringify(result));
+        console.log("RESULT iS: " + JSON.stringify(result));
 
         optionId = result[0].optionid;
         optionName = result[0].optionname;
@@ -57,7 +62,10 @@ app.get("/api/getdata",(req, res)=>{
        console.log("id " + optionId);
        console.log("name " + optionName);
 
-       
+       if(optionName === "Bank F.D")
+       {
+           
+       }
 
         
        res.send(result);
