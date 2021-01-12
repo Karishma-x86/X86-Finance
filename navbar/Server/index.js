@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { json } = require('body-parser');
 var https = require('https');
+const request = require('request');
 
 const app =   express();
 
@@ -25,6 +26,7 @@ const db = mysql.createPool({
 
 var dbData;
 var amount;
+var goldRate;
 
 function setValue(value) {
     dbData = value;
@@ -78,11 +80,32 @@ app.get("/api/getdata",(req, res)=>{
                 //console.log(row);
                 if(row.optionname === "Gold")
                 {
-                    https.get("https://metals-api.com/api/latest?access_key=059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge&base=INR&symbols=XAU", resgold=>{
+                    const API_KEY = "059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge";
 
-                       //var json = JSON.stringify(resgold);
-                       console.log(resgold);
+
+                    const url = "https://metals-api.com/api/latest?access_key=059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge&base=INR&symbols=XAU"; 
+                    //    //var url = "https://metals-api.com/api/latest?access_key=" + API_KEY ;//+ "&base=INR" + "&symbols=XAU" ;
+                    //     https.get(url, (resgold)=>{
+
+                    //         var resp = JSON.parse(resgold);
+                    //         // let rawData = '';
+
+                    //         // resgold.setEncoding('utf8');
+                    //         // resgold.on('data', (chunk) => {
+                    //         //     rawData += chunk;
+                    //         //   });
+                    //         console.log(resp);
+                    //     });
+                    request(url, function (error, response, body) {
+                       
+                        //console.log('body:', body); 
+                        var jObject = JSON.parse(body);
+                        var gRate = jObject.rates.XAU;
+                        //console.log(gRate);
+                        var 
+                        goldRate = gRate;
                     });
+
                 }
                 else if(row.optionname === "Bank F.D")
                 {

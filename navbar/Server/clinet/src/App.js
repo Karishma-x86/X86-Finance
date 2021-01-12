@@ -73,7 +73,7 @@ function App() {
       <InvestmentSuggestions />
     </div>
       <br/>  <br/> <br/><br/>
-	    <div style={divStyleAllSuggestion}>
+	    <div >
         <InvestmentOptions/>
       </div>
       <br></br>
