@@ -17,6 +17,7 @@
     background-color: rgb(142, 0, 69);
     cursor: pointer;
     height :95px;
+    margin-left:45px;
 }
 
 .fa-react
@@ -32,17 +33,22 @@
     list-style: none;
     text-align:center;
     width: 80vw;
+    margin-left: 1070px;
 }
+
 
 .nav-links{
     color: #fffcf9;
     text-decoration: none;
+    margin-right: 55px;
 }
 
 .nav-links:hover{
     background-color: rgb(142, 0, 69);
     border-radius: 4px;
     transition:all 0.2s ease-out;
+    cursor: pointer;
+
 }
 
 .fa-bars{

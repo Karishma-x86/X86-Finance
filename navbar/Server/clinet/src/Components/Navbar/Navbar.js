@@ -5,10 +5,28 @@ import './Navbar.css';
 
 class Navbar extends Component{
 
+    constructor(props){
+        super(props);
+    }
+
     state = {clicked:false}
 
     handleClick = ()=> {
         this.setState({clicked: !this.state.clicked})
+    }
+
+    navBarButtonClick = (title)=>{
+
+        {MenuItems.map((item, index)=>{
+            if(item.title === "All Investment Options")
+            {
+                console.log(item);
+                if(this.props.showAllOptionsButtonClick){
+                    this.props.showAllOptionsButtonClick();
+                    
+                  } 
+            }
+        })}
     }
 
     render(){
@@ -21,13 +39,12 @@ class Navbar extends Component{
                     <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}>
                     </i>
                 </div>
-                <ul className={this.state.clicked ? 'nav-menu active' :
-                'nav-menu'}>
+                <ul className={this.state.clicked ? 'nav-menu active' :'nav-menu'}>
                     {MenuItems.map((item, index)=>{
                         return(
                             <li key={index}>
-                                <a className={item.cName} href={item.url}>
-                                    {item.title}
+                                <a className={item.cName} href={item.url} onClick={this.navBarButtonClick(item.title)}>
+                                    {item.title} 
                                 </a>
                             </li>
                         )

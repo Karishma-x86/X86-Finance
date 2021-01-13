@@ -7,7 +7,9 @@ import InvestmentSuggestions from './Components/InvestmentSuggestions/Investment
 import './App.css';
 import { Component } from "react";
 import Axios from 'axios'
-
+import { MenuItems } from "./Components/Navbar/MenuItems";
+import './Components/Navbar/Navbar.css';
+import { Button } from './Components/Button';
 
 function App() {
 
@@ -15,14 +17,43 @@ function App() {
   const [risk, setRisk] = useState('')
   const [term, setTerm] = useState('')
   const [divsugg, setSugDiv] = useState('')
+  var result;
+   var clicked = false;
+
+  var allOptionsDiv = React.createRef()
   
+
+    const handleClick = ()=> {
+        //this.setState({clicked: !this.state.clicked})
+    }
+
+    const showAllOptionsButtonClick = ()=>{
+      
+      if(allOptionsDiv){
+        allOptionsDiv.current.scrollIntoView(true)
+        
+      } 
+    }
+
+  
+  
+
   const submitData = ()=>{
 
+    
     var risklvl = document.getElementById("risklevel").value;
-    //Axios.get('http://localhost:3001/api/getdata/${ risk,term}')
+    
     Axios.get('http://localhost:3001/api/getdata',{ params :{riskLevel : risklvl, termValue: term, amountgiven : amount}})
-    .then(res=>console.log(res));
-    setSugDiv("true");
+    .then(res=>{
+        result = res.data;
+      
+      });
+      if(result === "AMOUNT")
+      {
+          console.log(result);
+          setSugDiv("true");
+      }
+    
   };
   
   var divStyleSuggestion = {
@@ -35,12 +66,41 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+        <nav className="NavbarItems">
+                <h1 className="navbar-logo">
+                    <img src="logo_transparent.png" width="120" height="100" />
+                </h1>
+                <div className="menu-icon" onClick={handleClick}>
+                    <i className={clicked ? 'fas fa-times' : 'fas fa-bars'}>
+                    </i>
+                </div>
+                <ul className='nav-menu'>
+                    {/* {MenuItems.map((item, index)=>{
+                        return(
+                            <li key={index}>
+                                <a className={item.cName} href={item.url} onClick={navBarButtonClick(item.title)}>
+                                    {item.title} 
+                                </a>
+                                
+                            </li>
+                        )
+                    })} */
+                    <li >
+                      <Button className="nav-links" onClick={showAllOptionsButtonClick}>Home</Button>
+                      <Button className="nav-links" >All Options </Button>
+                      <Button className="nav-links">About us</Button>
+                    </li>
+                   
+                    }
+                    
+                </ul>
+               
+            </nav>
       <div className="imagecss">
      
      <h1 className = "header">Let's Get Started</h1>
 
-</div>
+    </div>
 
 	  <div class="container">
         <form className = "form">
@@ -65,19 +125,48 @@ function App() {
            </input>
           <br/><br/>
           
-		  <button className="showbutton"  onClick={submitData}> Submit options</button>
+		  <button className="showbutton"  onClick={showAllOptionsButtonClick}> Submit options</button>
         </form>
     </div>
-    <br></br>
-    <div style={divStyleSuggestion}>
-      <InvestmentSuggestions />
-    </div>
-      <br/>  <br/> <br/><br/>
-	    <div >
-        <InvestmentOptions/>
-      </div>
       <br></br>
-      <AboutUs />
+      <div style={divStyleSuggestion}>
+        <InvestmentSuggestions />
+      </div>
+        <br/>  <br/> <br/><br/>
+        <div >
+          <div ref={allOptionsDiv}>
+              <h1 className = "headerForInvestment"> 
+                All Investment Options
+              </h1>     
+              <br/>
+
+                <table>
+                  <tr>
+                    <th>Option Name</th>
+                    <th>Risk</th>
+                    <th>Minimum Term To Invest(Months)</th>
+                  </tr>
+                  <tr>
+                    <td>Gold</td>
+                    <td>High</td>
+                    <td>N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Stocks</td>
+                    <td>Medium</td>
+                    <td>N/A</td>
+                  </tr>
+                  <tr>
+                  <td>Bank F.D</td>
+                    <td>Low</td>
+                    <td>1</td>
+                  </tr>
+              </table>
+
+          </div>
+        </div>
+        <br></br>
+        <AboutUs />
     </div>
     
   );

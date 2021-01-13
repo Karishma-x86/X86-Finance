@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { json } = require('body-parser');
 var https = require('https');
 const request = require('request');
+const { Console } = require('console');
 
 const app =   express();
 
@@ -52,7 +53,14 @@ app.get("/api/getdata",(req, res)=>{
     amount = req.query.amountgiven;
 
     //console.log(amount);
+    if(!amount)
+    {
+        console.log("Amount is null...");
+        return(res.send("AMOUNT"));
+        
+    }
 
+    console.log("After null check...");
     var sqlSelect;
 
     if(!term)
@@ -80,8 +88,7 @@ app.get("/api/getdata",(req, res)=>{
                 //console.log(row);
                 if(row.optionname === "Gold")
                 {
-                    const API_KEY = "059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge";
-
+                    
 
                     const url = "https://metals-api.com/api/latest?access_key=059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge&base=INR&symbols=XAU"; 
                     //    //var url = "https://metals-api.com/api/latest?access_key=" + API_KEY ;//+ "&base=INR" + "&symbols=XAU" ;
@@ -102,8 +109,9 @@ app.get("/api/getdata",(req, res)=>{
                         var jObject = JSON.parse(body);
                         var gRate = jObject.rates.XAU;
                         //console.log(gRate);
-                        var 
-                        goldRate = gRate;
+                        
+                        goldRate = (parseFloat(gRate)/31.103)*10;
+                        console.log(goldRate);
                     });
 
                 }
