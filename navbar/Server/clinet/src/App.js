@@ -86,9 +86,9 @@ function App() {
                         )
                     })} */
                     <li >
-                      <Button className="nav-links" onClick={showAllOptionsButtonClick}>Home</Button>
-                      <Button className="nav-links" >All Options </Button>
-                      <Button className="nav-links">About us</Button>
+                      <button className="nav-links" >Home</button>
+                      <button className="nav-links" onClick={showAllOptionsButtonClick}>All Options </button>
+                      <button className="nav-links">About us</button>
                     </li>
                    
                     }
