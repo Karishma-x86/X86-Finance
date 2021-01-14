@@ -6,7 +6,7 @@
 }
 
 input,select {
-  width: 100%;
+  width: 615px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -21,7 +21,10 @@ input,select {
   text-decoration: none;
   width :200px;
   padding: 10px;
-  margin-left: 500px;
+  margin-left: 708px;
+  font-size: 19px;
+  margin-top: 38px;
+  cursor: grab;
 }
 
 .container {

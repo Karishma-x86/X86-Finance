@@ -103,22 +103,22 @@ function App() {
     </div>
 
 	  <div class="container">
-        <form className = "form">
-        <h3 className="headers">
+        
+        <h3 className="headersform">
                     Investment Amount
                 </h3> 
                  <input type = "number" name = "amount" min="1.0" required = "true" 
                  placeholder="Enter amount you wish to invest" onChange={(e)=>{
                   setAmount(e.target.value)}}/>
           <br/><br/>
-          <h3 className="headers">Risk</h3>   
+          <h3 className="headersform">Risk</h3>   
           <select name = "risks" id="risklevel">
               <option value = "Low" selected>Low</option>
               <option value = "Medium">Medium</option>
               <option value = "High">High</option>
           </select>
           <br/><br/>
-          <h3 className="headers">Investment Term </h3>
+          <h3 className="headersform">Investment Term </h3>
            <input type="number" id="term" name="term" min="1" placeholder="Enter terms(month) for investment" 
            onChange={(e)=>{setTerm(e.target.value)}}>
 
@@ -126,7 +126,7 @@ function App() {
           <br/><br/>
           
 		  <button className="showbutton"  onClick={showAllOptionsButtonClick}> Submit options</button>
-        </form>
+        
     </div>
       <br></br>
       <div style={divStyleSuggestion}>
