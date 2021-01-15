@@ -24,7 +24,7 @@ input,select {
   margin-left: 708px;
   font-size: 19px;
   margin-top: 38px;
-  cursor: grab;
+  cursor: pointer;
 }
 
 .container {

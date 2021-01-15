@@ -39,9 +39,11 @@
 
 
 .nav-links{
-    color: #fffcf9;
+    color: #191817;
     text-decoration: none;
     margin-right: 55px;
+    height: 28px;
+    width: 82px;
 }
 
 .nav-links:hover{

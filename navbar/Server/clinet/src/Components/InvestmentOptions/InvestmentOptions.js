@@ -31,7 +31,7 @@ class InvestmentOptions extends Component{
                 <tr>
                 <td>Bank F.D</td>
                   <td>Low</td>
-                  <td>1</td>
+                  <td>12</td>
                 </tr>
             </table>
 

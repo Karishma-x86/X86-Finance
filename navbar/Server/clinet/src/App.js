@@ -17,11 +17,16 @@ function App() {
   const [risk, setRisk] = useState('')
   const [term, setTerm] = useState('')
   const [divsugg, setSugDiv] = useState('')
+
+  const [resutToShow, setResult] = useState('')
+
   var result;
    var clicked = false;
 
+   var suggestion = "BANK F.D";
   var allOptionsDiv = React.createRef()
-  
+  var aboutusDiv = React.createRef();
+  var homeDiv = React.createRef();
 
     const handleClick = ()=> {
         //this.setState({clicked: !this.state.clicked})
@@ -35,6 +40,21 @@ function App() {
       } 
     }
 
+    const showHomeButtonClick = ()=>{
+      
+      if(homeDiv){
+        homeDiv.current.scrollIntoView(true)
+        
+      } 
+    }
+
+    const showAboutUsButtonClick = ()=>{
+      
+      if(aboutusDiv){
+        aboutusDiv.current.scrollIntoView(true)
+        
+      } 
+    }
   
   
 
@@ -45,14 +65,21 @@ function App() {
     
     Axios.get('http://localhost:3001/api/getdata',{ params :{riskLevel : risklvl, termValue: term, amountgiven : amount}})
     .then(res=>{
+        //result = JSON.parse(res.data);
+        
         result = res.data;
-      
+        suggestion = result;
+        setResult(result);
+        setSugDiv("true");
+        console.log(result);
       });
-      if(result === "AMOUNT")
-      {
-          console.log(result);
-          setSugDiv("true");
-      }
+      
+      //console.log(result);
+      // if(result.reason === "AMOUNT")
+      // {
+      //     console.log(result);
+      //     setSugDiv("true");
+      // }
     
   };
   
@@ -65,7 +92,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" ref={homeDiv}>
         <nav className="NavbarItems">
                 <h1 className="navbar-logo">
                     <img src="logo_transparent.png" width="120" height="100" />
@@ -86,9 +113,9 @@ function App() {
                         )
                     })} */
                     <li >
-                      <button className="nav-links" >Home</button>
+                      <button className="nav-links" onClick={showHomeButtonClick}>Home</button>
                       <button className="nav-links" onClick={showAllOptionsButtonClick}>All Options </button>
-                      <button className="nav-links">About us</button>
+                      <button className="nav-links" onClick={showAboutUsButtonClick}>About us</button>
                     </li>
                    
                     }
@@ -125,12 +152,20 @@ function App() {
            </input>
           <br/><br/>
           
-		  <button className="showbutton"  onClick={showAllOptionsButtonClick}> Submit options</button>
+		  <button className="showbutton"  onClick={submitData}> Submit options</button>
         
     </div>
       <br></br>
       <div style={divStyleSuggestion}>
-        <InvestmentSuggestions />
+        <div className="containercss">
+            <h1 >Suggested RoadMap </h1>
+           <h3 >We suggest you to invest in {resutToShow} based on your inputs </h3>
+           <p className="result-para">
+               After calculating the profit results using the given inputs for all the available Options,
+                {resutToShow} is the most suitable option.Currently it is avaible at ow cost and purchasing would get you profit
+                in later phase whem gold value increases.
+           </p>
+        </div>
       </div>
         <br/>  <br/> <br/><br/>
         <div >
@@ -166,7 +201,24 @@ function App() {
           </div>
         </div>
         <br></br>
-        <AboutUs />
+            <div ref={aboutusDiv}>
+                <h1 className = "headerForAboutUs"> About Us</h1> 
+                <p className ="aboutUsPara"> 
+                              IRM is investment road map for employee,youngsters,senior people to know their way for investment.Every youngster, employee or experienced person, thinks to invest their income into some policy or plans in market as secondary source of income. We propose a site that suggests best investment options based on the amount, risk taking or not and term of investment. The options include FD, Flexi Account, mutual fund, gold, silver land, properties, DMAT and many other options. The existing apps mostly promote some specific company or policy. The proposed site will provide guide map for user to invest rightly as per his inputs.
+                  It will provide the amount of profit or returns based on current value for the option chosen as best. 
+                  This will majorly consist of dynamically getting market current values for all the options and easy way to compare instead of visiting various sites for every option. 
+                  Integration to various sites to get info or redirect user will provide navigation.
+                  The goal is to provide basic road map for any investor.     
+                </p>
+              <br/>
+              <br/>
+
+              <p>Contact Us:</p>
+                <address>
+                  <a href="mailto:karishmakothari1996.kk@gmail.com">karishmakothari1996.kk@gmail.com</a><br/>
+                  <a href="tel:+919325334783">(91)-9325334783 </a>
+              </address>
+        </div>
     </div>
     
   );

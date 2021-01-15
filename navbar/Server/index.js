@@ -28,6 +28,12 @@ const db = mysql.createPool({
 var dbData;
 var amount;
 var goldRate;
+var finalOption;
+
+function setFinalOption(value){
+    finalOption = value;
+}
+
 
 function setValue(value) {
     dbData = value;
@@ -46,17 +52,19 @@ function setValue(value) {
 
 
 //Need parameters to call getdata..
-app.get("/api/getdata",(req, res)=>{
+app.get("/api/getdata",async(req, res)=>{
 
     var risk = req.query.riskLevel;
     var term = req.query.termValue;
     amount = req.query.amountgiven;
 
+    var resultSuggestion = '';
     //console.log(amount);
     if(!amount)
     {
         console.log("Amount is null...");
         return(res.send("AMOUNT"));
+        //return(res.send(JSON.stringify({"reason" : "AMOUNT"})));
         
     }
 
@@ -72,7 +80,7 @@ app.get("/api/getdata",(req, res)=>{
          sqlSelect = "select * from FinanceOptions where risklevel=(?) ;"
     }
 
-        db.query(sqlSelect,[risk,term],(error, result)=>{
+        db.query(sqlSelect,[risk,term],async(error, result)=>{
         
         // console.log("RESULT iS: " + JSON.stringify(result));
 
@@ -91,26 +99,29 @@ app.get("/api/getdata",(req, res)=>{
                     
 
                     const url = "https://metals-api.com/api/latest?access_key=059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge&base=INR&symbols=XAU"; 
-                    //    //var url = "https://metals-api.com/api/latest?access_key=" + API_KEY ;//+ "&base=INR" + "&symbols=XAU" ;
-                    //     https.get(url, (resgold)=>{
-
-                    //         var resp = JSON.parse(resgold);
-                    //         // let rawData = '';
-
-                    //         // resgold.setEncoding('utf8');
-                    //         // resgold.on('data', (chunk) => {
-                    //         //     rawData += chunk;
-                    //         //   });
-                    //         console.log(resp);
-                    //     });
-                    request(url, function (error, response, body) {
+                    
+                     request(url, async function (error, response, body) {
                        
                         //console.log('body:', body); 
                         var jObject = JSON.parse(body);
                         var gRate = jObject.rates.XAU;
-                        //console.log(gRate);
+                        console.log(gRate);
                         
+                        //10 grams is considered...
                         goldRate = (parseFloat(gRate)/31.103)*10;
+                        var res = parseFloat(goldRate)/parseFloat(amount);
+                        console.log("res is " + res);
+                        if(res >= 1.0)
+                        {
+                            console.log("If condition");
+                            setFinalOption(" GOLD");
+                        }
+                        else
+                        {
+                            console.log("ELSE condition");
+                            setFinalOption(" Bank F.D ");
+
+                        }
                         console.log(goldRate);
                     });
 
@@ -122,7 +133,7 @@ app.get("/api/getdata",(req, res)=>{
                     if(term)
                     {
                         time  = term/12; 
-                        console.log("TIME is " + time); 
+                        //console.log("TIME is " + time); 
                     }
                     var simpleInterest = (amount * RATEOFINTEREST * time)/100;
                     
@@ -130,12 +141,13 @@ app.get("/api/getdata",(req, res)=>{
                     //console.log("SI  " + simpleInterest);
                     console.log("Final amount after term  " + finalAmount );
 
+                   setFinalOption(" Bank F.D ");
                 }
-
+                
             });
         });
 
-    res.send("HELLO");
+    res.send(finalOption);
 });
 
 
