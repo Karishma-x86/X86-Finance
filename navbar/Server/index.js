@@ -98,7 +98,7 @@ app.get("/api/getdata",async(req, res)=>{
                 {
                     
 
-                    const url = "https://metals-api.com/api/latest?access_key=059hb32nth12rw63vt8s41eu5f793t328v9i5sjn183fn13369xwcbz9eyge&base=INR&symbols=XAU"; 
+                    const url = "https://metals-api.com/api/latest?access_key=roye7q95ncw77ftbi43qbk39n781mdl8wpz5c352mv99fv3j5uenq7v5qg1o&base=INR&symbols=XAU"; 
                     
                      request(url, async function (error, response, body) {
                        
@@ -109,7 +109,7 @@ app.get("/api/getdata",async(req, res)=>{
                         
                         //10 grams is considered...
                         goldRate = (parseFloat(gRate)/31.103)*10;
-                        var res = parseFloat(goldRate)/parseFloat(amount);
+                        var res = parseFloat(amount)/parseFloat(goldRate);
                         console.log("res is " + res);
                         if(res >= 1.0)
                         {
@@ -141,7 +141,7 @@ app.get("/api/getdata",async(req, res)=>{
                     //console.log("SI  " + simpleInterest);
                     console.log("Final amount after term  " + finalAmount );
 
-                   setFinalOption(" Bank F.D ");
+                   setFinalOption("Bank F.D");
                 }
                 
             });

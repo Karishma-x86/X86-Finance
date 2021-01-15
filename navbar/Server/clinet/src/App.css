@@ -34,7 +34,7 @@ input,select {
 }
 
 .imagecss{
-  background: url(./image.png) no-repeat center center fixed;
+  background: url(../src/Components/Navbar/image.png) no-repeat center center fixed;
     height: 200px;
     /* Center and scale the image nicely */
     background-position: center;

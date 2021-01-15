@@ -10,6 +10,7 @@ import Axios from 'axios'
 import { MenuItems } from "./Components/Navbar/MenuItems";
 import './Components/Navbar/Navbar.css';
 import { Button } from './Components/Button';
+import Background from './Components/Navbar/image.png';
 
 function App() {
 
@@ -63,7 +64,7 @@ function App() {
     
     var risklvl = document.getElementById("risklevel").value;
     
-    Axios.get('http://localhost:3001/api/getdata',{ params :{riskLevel : risklvl, termValue: term, amountgiven : amount}})
+    Axios.get('http://ec2-65-0-132-230.ap-south-1.compute.amazonaws.com:3001/api/getdata',{ params :{riskLevel : risklvl, termValue: term, amountgiven : amount}})
     .then(res=>{
         //result = JSON.parse(res.data);
         
@@ -113,9 +114,9 @@ function App() {
                         )
                     })} */
                     <li >
-                      <button className="nav-links" onClick={showHomeButtonClick}>Home</button>
-                      <button className="nav-links" onClick={showAllOptionsButtonClick}>All Options </button>
-                      <button className="nav-links" onClick={showAboutUsButtonClick}>About us</button>
+                      <button className="nav-links-home" onClick={showHomeButtonClick}>Home</button>
+                      <button className="nav-links-alloptions" onClick={showAllOptionsButtonClick}>All Options </button>
+                      <button className="nav-links-home" onClick={showAboutUsButtonClick}>About us</button>
                     </li>
                    
                     }
@@ -123,7 +124,10 @@ function App() {
                 </ul>
                
             </nav>
-      <div className="imagecss">
+      <div className="imagecss" style={{
+              backgroundImage: `url(${Background})`,
+              
+            }}>
      
      <h1 className = "header">Let's Get Started</h1>
 
@@ -162,8 +166,7 @@ function App() {
            <h3 >We suggest you to invest in {resutToShow} based on your inputs </h3>
            <p className="result-para">
                After calculating the profit results using the given inputs for all the available Options,
-                {resutToShow} is the most suitable option.Currently it is avaible at ow cost and purchasing would get you profit
-                in later phase whem gold value increases.
+                {resutToShow} is the most suitable option.
            </p>
         </div>
       </div>
@@ -194,7 +197,7 @@ function App() {
                   <tr>
                   <td>Bank F.D</td>
                     <td>Low</td>
-                    <td>1</td>
+                    <td>12</td>
                   </tr>
               </table>
 

@@ -37,14 +37,46 @@
     height: 35px;
 }
 
-
-.nav-links{
+.nav-links-alloptions, .nav-links-home {
+    color: #fffcf9;
+    text-decoration: none;
+    height: 28px;
+    /* width: 82px; */
+    padding: 4px;
+    font-family: 'Monsterrat', sans-serif;
+    background: linear-gradient(90deg, rgb(142, 0, 69), rgb(142, 0, 69) 50%);
+    /* height: 100px; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+border: none;
+  outline: none;
+}
+/* 
+.nav-links-home{
     color: #191817;
     text-decoration: none;
-    margin-right: 55px;
+    margin-left: -130px;
     height: 28px;
     width: 82px;
 }
+
+.nav-links-alloptions{
+    color: #191817;
+    text-decoration: none;
+    margin-right: 55px;margin-left: 35px;
+    height: 28px;
+    width: 82px;
+}
+
+.nav-links-aboutus{
+    color: #191817;
+    text-decoration: none;
+    margin-left: -23px;
+    height: 28px;
+    width: 82px;
+} */
 
 .nav-links:hover{
     background-color: rgb(142, 0, 69);
